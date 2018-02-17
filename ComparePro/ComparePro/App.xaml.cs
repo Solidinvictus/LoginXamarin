@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace ComparePro
 {
+    //Empezemos!
     public partial class App : Application
     {
         public App()
