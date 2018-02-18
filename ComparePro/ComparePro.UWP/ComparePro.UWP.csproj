@@ -108,6 +108,10 @@
     <None Include="ComparePro.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Assets\CompareProLogo.png" />
+    <BundleResource Include="Assets\facebook_logo.png" />
+    <BundleResource Include="Assets\instagram_logo.png" />
+    <BundleResource Include="Assets\twitter_logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
