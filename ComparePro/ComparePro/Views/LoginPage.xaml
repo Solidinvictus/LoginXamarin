@@ -80,6 +80,7 @@
                         BackgroundColor="Navy"
                         BorderRadius="20"
                         Command="{Binding LoginCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         FontAttributes="Bold"
                         HeightRequest="40"
                         HorizontalOptions="FillAndExpand"
@@ -91,6 +92,7 @@
                         BorderRadius="20"
                         HeightRequest="40"
                         HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         Text="Register"
                         TextColor="White"
                         Command="{Binding RegisterCommand}">
