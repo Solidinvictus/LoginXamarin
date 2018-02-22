@@ -8,18 +8,15 @@ using System.Threading.Tasks;
 
 namespace ComparePro.ViewModels
 {
+    using ComparePro.Views;
     using GalaSoft.MvvmLight.Command;
     using System.ComponentModel;
     //using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
 
-    class LoginViewModel : INotifyPropertyChanged
+    class LoginViewModel : BaseViewModel                                  //En vez de INotifyPropertyChanged, ver impl BaseViewModel
     {
-        #region Events
-        public event PropertyChangedEventHandler PropertyChanged;       //Esta interfaz es para refrescar 
-        #endregion
-
         //Los atributos privados que necesitamos refrescar
         #region Atributes
         private string email;
@@ -32,9 +29,34 @@ namespace ComparePro.ViewModels
         #region Properties
         public string Email
         {
-            get;
-            set;
+            get
+            {
+                return this.email;
+            }
+            set
+            {
+                SetValue(ref this.email, value);
+            }
         }
+
+        //En vez de todo el chorizo de código como el que aparece abajo, usamos la clase BaseViewModel
+        /* public string Password
+         {
+             get
+             {
+                 return this.password;
+             }
+             set
+             {
+                 if(this.password != value)
+                 {
+                     this.password = value;
+                     //Para refrescar las instrucciones en tpo de ejecucion
+                     PropertyChanged?.Invoke(this,
+                         new PropertyChangedEventArgs(nameof(this.Password)));
+                 }
+             }
+         }*/
 
         public string Password
         {
@@ -44,13 +66,7 @@ namespace ComparePro.ViewModels
             }
             set
             {
-                if(this.password != value)
-                {
-                    this.password = value;
-                    //Para refrescar las instrucciones en tpo de ejecucion
-                    PropertyChanged?.Invoke(this,
-                        new PropertyChangedEventArgs(nameof(this.Password)));
-                }
+                SetValue(ref this.password, value);
             }
         }
 
@@ -62,12 +78,7 @@ namespace ComparePro.ViewModels
             }
             set
             {
-                if (this.isRunning != value)
-                {
-                    this.isRunning = value;
-                    PropertyChanged?.Invoke(this,
-                        new PropertyChangedEventArgs(nameof(this.IsRunning)));
-                }
+                SetValue(ref this.isRunning, value);
             }
         }
 
@@ -79,12 +90,7 @@ namespace ComparePro.ViewModels
             }
             set
             {
-                if (this.isRemembered != value)
-                {
-                    this.isRemembered = value;
-                    PropertyChanged?.Invoke(this,
-                        new PropertyChangedEventArgs(nameof(this.IsRemembered)));
-                }
+                SetValue(ref this.isRemembered, value);
             }
         }
 
@@ -96,12 +102,7 @@ namespace ComparePro.ViewModels
             }
             set
             {
-                if (this.isEnabled != value)
-                {
-                    this.isEnabled = value;
-                    PropertyChanged?.Invoke(this,
-                        new PropertyChangedEventArgs(nameof(this.IsEnabled)));
-                }
+                SetValue(ref this.isEnabled, value);
             }
         }
         #endregion
@@ -153,18 +154,76 @@ namespace ComparePro.ViewModels
 
             this.IsRunning = false;
             this.IsEnabled = true;
-            await Application.Current.MainPage.DisplayAlert(
+            /*await Application.Current.MainPage.DisplayAlert(
                 "Ok",
                 "Hell Yeah!!",
                 "Accept");
-            return;
+            return;*/
+            this.email = string.Empty;
+            this.password = string.Empty;
+
+            //Antes de ir a la pagina ComparePage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
+            MainViewModel.GetInstance().Compare = new CompareViewModel();
+            //Toca pushear la pagina ComparePage al validar el Login
+            await Application.Current.MainPage.Navigation.PushAsync(new ComparePage());
         }
 
         public ICommand RegisterCommand
         {
-            get;
-            set;
+            get
+            {
+                return new RelayCommand(Register);    
+            }
         }
+
+        private async void Register()      //Para manejar los alerts en dif dispos, hace falta metodos asincronos
+        {
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",        //Titulo del error
+                    "You must enter an email ",     //Mensaje del error
+                    "Accept");      //Texto del boton
+                return;
+            }
+            if (string.IsNullOrEmpty(this.Password))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "You must enter a password ",
+                    "Accept");
+                return;
+            }
+
+            this.IsRunning = false;
+            this.IsEnabled = true;
+           
+            this.email = string.Empty;
+            this.password = string.Empty;
+
+            //Antes de ir a la pagina RegisterPage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
+            MainViewModel.GetInstance().Register = new RegisterViewModel();
+            //Toca pushear la pagina RegisterPage al validar el registro
+            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+        }
+
+        public ICommand PreferenceCommand
+        {
+            get
+            {
+                return new RelayCommand(Preference);     //De la libreria instalada GalaSoft.MvvmLight.Command, y le pasamos un metodo por param
+            }
+        }
+
+        private async void Preference()
+        {
+            //Antes de ir a la pagina RegisterPage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
+            MainViewModel.GetInstance().Preference = new PreferencesViewModel();
+            //Toca pushear la pagina RegisterPage al validar el registro
+            await Application.Current.MainPage.Navigation.PushAsync(new PreferencesPage());
+        }
+
+
         #endregion
 
         #region Constructors
@@ -172,6 +231,9 @@ namespace ComparePro.ViewModels
         {
             this.IsRemembered = true;
             this.IsEnabled = true;
+
+            this.Email = "welltec@gmail.com";           //Luego se quita esto
+            this.Password = "1234";                     //Luego se quita esto
         }
         #endregion  
     }

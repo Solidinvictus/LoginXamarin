@@ -3,7 +3,7 @@
   <Application.Resources>
     <!-- Application resource dictionary -->
     <ResourceDictionary>
-            <infra:InstanceLocator x:Key="Locator" />
-        </ResourceDictionary>
+        <infra:InstanceLocator x:Key="Locator" />
+    </ResourceDictionary>
   </Application.Resources>
 </Application>
