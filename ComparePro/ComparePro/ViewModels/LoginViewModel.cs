@@ -178,29 +178,6 @@ namespace ComparePro.ViewModels
 
         private async void Register()      //Para manejar los alerts en dif dispos, hace falta metodos asincronos
         {
-            if (string.IsNullOrEmpty(this.Email))
-            {
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",        //Titulo del error
-                    "You must enter an email ",     //Mensaje del error
-                    "Accept");      //Texto del boton
-                return;
-            }
-            if (string.IsNullOrEmpty(this.Password))
-            {
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "You must enter a password ",
-                    "Accept");
-                return;
-            }
-
-            this.IsRunning = false;
-            this.IsEnabled = true;
-           
-            this.email = string.Empty;
-            this.password = string.Empty;
-
             //Antes de ir a la pagina RegisterPage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
             MainViewModel.GetInstance().Register = new RegisterViewModel();
             //Toca pushear la pagina RegisterPage al validar el registro
