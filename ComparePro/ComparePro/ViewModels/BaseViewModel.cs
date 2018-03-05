@@ -31,6 +31,5 @@ namespace ComparePro.ViewModels
             backingField = value;
             OnPropertyChanged(propertyName);
         }
-
     }
 }

@@ -95,7 +95,7 @@
                         FontAttributes="Bold"
                         HeightRequest="40"
                         HorizontalOptions="FillAndExpand"
-                        Text="Config"
+                        Text="Settings"
                         TextColor="White">
                     </Button>
                     <Button
