@@ -33,6 +33,23 @@ namespace ComparePro.ViewModels
             set;
         }
 
+        public HomeViewModel Home
+        {
+            get;
+            set;
+        }
+
+        public InsertViewModel Insert
+        {
+            get;
+            set;
+        }
+
+        public ShowViewModel Show
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -40,6 +57,9 @@ namespace ComparePro.ViewModels
         {
             instance = this;
             this.Login = new LoginViewModel();
+            this.Register = new RegisterViewModel();
+            this.Home = new HomeViewModel();
+
         }
 
         //Para poder tener una sola instancia en toda la applicacion de la MainViewModel

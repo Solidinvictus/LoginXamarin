@@ -18,7 +18,7 @@ namespace ComparePro.Views
         }
 
         //Metodos de Ivan --> Logica Register
-        private void validateRegister(object sender, EventArgs e)
+        /*private void validateRegister(object sender, EventArgs e)
         {
             string message = "";
             string user = entryUsername.Text;
@@ -62,6 +62,6 @@ namespace ComparePro.Views
             entryConfirmEmail.Text = "";
             entryCountry.Text = "";
             entryProvince.Text = "";
-        }
+        }*/
     }
 }
