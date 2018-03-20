@@ -16,7 +16,7 @@ namespace ComparePro
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());     //Arrancamos la app de momento desde el login
+            MainPage = new NavigationPage(new LoginPage());     //Arrancamos la app de momento desde el login-->Se carga la pagina solo(LoginPage)
            
         }
         #endregion

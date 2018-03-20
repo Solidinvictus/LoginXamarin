@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComparePro.ViewModels
 {
+    using ComparePro.Models;
     using ComparePro.Views;
     using GalaSoft.MvvmLight.Command;
     using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace ComparePro.ViewModels
         private bool isRunning;
         private bool isEnabled;
         private bool isRemembered;
+        private bool correct;
         #endregion
 
         #region Properties
@@ -118,12 +120,14 @@ namespace ComparePro.ViewModels
         //Param del RelayCommand
         private async void Login()      //Para manejar los alerts en dif dispos, hace falta metodos asincronos
         {
+            correct = true;
             if (string.IsNullOrEmpty(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",        //Titulo del error
                     "You must enter an email ",     //Mensaje del error
                     "Accept");      //Texto del boton
+                correct = false;
                 return;
             }
             if (string.IsNullOrEmpty(this.Password))
@@ -132,13 +136,14 @@ namespace ComparePro.ViewModels
                     "Error",
                     "You must enter a password ",
                     "Accept");
+                correct = false;
                 return;
             }
 
             this.IsRunning = true;
             this.IsEnabled = false;
             //Esto es temporal, ya que esto debería ir a un archivo de recursos (solucion temporal) y luego en la BBDD
-            if (this.Email != "welltec@gmail.com" || this.Password != "1234")
+            /*if (this.Email != "welltec@gmail.com" || this.Password != "1234")
             {
                 this.IsRunning = false;
                 this.IsEnabled = true;
@@ -148,8 +153,9 @@ namespace ComparePro.ViewModels
                    "Accept");
                 //Limpiamos el campo del password al ingresar uno erroneo
                 this.Password = string.Empty;       //No va a funcionar pq no está referenciado en el ViewModel-->sol: Implementar la interfaz INotifyPropertyChanged
+                correct = false;
                 return;
-            }
+            }*/
 
             this.IsRunning = false;
             this.IsEnabled = true;
@@ -158,13 +164,45 @@ namespace ComparePro.ViewModels
                 "Hell Yeah!!",
                 "Accept");
             return;*/
-            this.email = string.Empty;
-            this.password = string.Empty;
+            /*this.email = string.Empty;
+            this.password = string.Empty;*/
+
+            //LOGUEO
+            if (correct)
+            {
+                User u = null;
+                using (var data = new DataAccess())
+                {
+                    u = data.GetUsersValidate(this.email, this.password);
+                }
+                if (u == null)
+                {
+                    correct = false;
+                    await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Email or Password incorrect",
+                    "Accept");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert(
+                    "Ok",
+                    "Access granted!",
+                    "Accept");
+                }
+            }
+
+            //Si todo es correcto y el logueo es correcto, pasamos al HomePage
+            if (correct)
+            {
+                MainViewModel.GetInstance().Home = new HomeViewModel();
+                //Toca pushear la pagina ComparePage al validar el Login
+                await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+
+            }
 
             //Antes de ir a la pagina ComparePage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
-            MainViewModel.GetInstance().Home = new HomeViewModel();
-            //Toca pushear la pagina ComparePage al validar el Login
-            await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+            
         }
 
         public ICommand RegisterCommand
@@ -210,7 +248,7 @@ namespace ComparePro.ViewModels
 
             /*this.Email = "welltec@gmail.com";           //Luego se quita esto
             this.Password = "1234";  */                   //Luego se quita esto
-        }
-        #endregion  
-    }
+                }
+                #endregion
+            }
 }

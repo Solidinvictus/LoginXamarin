@@ -215,7 +215,7 @@ namespace ComparePro.ViewModels
             //Aqui creamos nuestra instancia de User
             
 
-            if (correct && this.Email .Equals(this.confirmedEmail) && this.Password.Equals(this.ConfirmedPassword))
+            if (correct && this.Email.Equals(this.confirmedEmail) && this.Password.Equals(this.ConfirmedPassword))
             {
                 this.userToRegister.UserName = User;            
                 this.userToRegister.Email = Email;       
@@ -223,9 +223,27 @@ namespace ComparePro.ViewModels
                 this.userToRegister.BirthDay = BirthDay;
                 this.userToRegister.Country = Country;
                 this.userToRegister.Province = Province;
+                if(this.userToRegister.Email.Equals("welltec@gmail.com") && this.userToRegister.Password.Equals("1234"))
+                {
+                    this.userToRegister.Admin = true;
+                }
+                else
+                {
+                    this.userToRegister.Admin = false;
+                }
+                //Logica Base de datos para insertar el usuario
+                using (var data = new DataAccess())
+                {
+                    data.InsertUser(userToRegister);
+                    await Application.Current.MainPage.DisplayAlert(
+                   "Success",
+                   "The user "+data.GetUser(userToRegister.IdUser).UserName+" has been succesfully inserted into the data base ",
+                   "Accept");
+                }
 
                 //Antes de ir a la pagina ComparePage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
                 MainViewModel.GetInstance().Login = new LoginViewModel();
+
                 //Toca pushear la pagina ComparePage al validar el Login
                 await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
 

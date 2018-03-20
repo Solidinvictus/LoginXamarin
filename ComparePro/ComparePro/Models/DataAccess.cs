@@ -38,9 +38,25 @@ namespace ComparePro
             return connection.Table<User>().FirstOrDefault(c => c.IdUser == IdUser);
         }
 
+        public User GetUser(string email)
+        {
+            return connection.Table<User>().FirstOrDefault(c => c.Email == email);
+        }
+
         public List<User> GetUsers()
         {
             return connection.Table<User>().OrderBy(c => c.UserName).ToList();
+        }
+
+        public User GetUsersValidate(string email, string pass)
+        {
+            User user = null;
+
+            if((user = GetUser(email)) != null){
+                if (user.Password == pass)
+                    return user;
+            }
+            return null;
         }
 
         public void Dispose()

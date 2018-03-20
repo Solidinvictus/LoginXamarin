@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComparePro.ViewModels
 {
-    class MainViewModel
+    class MainViewModel     //Nuestro controlador principal
     {
         #region ViewModels
         public LoginViewModel Login
@@ -59,6 +59,9 @@ namespace ComparePro.ViewModels
             this.Login = new LoginViewModel();
             this.Register = new RegisterViewModel();
             this.Home = new HomeViewModel();
+            this.Insert = new InsertViewModel();
+            this.Show = new ShowViewModel();
+            this.Preference = new PreferencesViewModel();
 
         }
 
