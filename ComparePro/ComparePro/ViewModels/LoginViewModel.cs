@@ -11,7 +11,6 @@ namespace ComparePro.ViewModels
     using ComparePro.Views;
     using GalaSoft.MvvmLight.Command;
     using System.ComponentModel;
-    //using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -163,9 +162,9 @@ namespace ComparePro.ViewModels
             this.password = string.Empty;
 
             //Antes de ir a la pagina ComparePage, usamos ql patron Singleton e instanciamos nuestra MainViewModel
-            MainViewModel.GetInstance().Compare = new CompareViewModel();
+            MainViewModel.GetInstance().Home = new HomeViewModel();
             //Toca pushear la pagina ComparePage al validar el Login
-            await Application.Current.MainPage.Navigation.PushAsync(new ComparePage());
+            await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
         }
 
         public ICommand RegisterCommand
@@ -209,8 +208,8 @@ namespace ComparePro.ViewModels
             this.IsRemembered = true;
             this.IsEnabled = true;
 
-            this.Email = "welltec@gmail.com";           //Luego se quita esto
-            this.Password = "1234";                     //Luego se quita esto
+            /*this.Email = "welltec@gmail.com";           //Luego se quita esto
+            this.Password = "1234";  */                   //Luego se quita esto
         }
         #endregion  
     }

@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ComparePro.Views.RegisterPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Register">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView
+             BindingContext="{Binding Register}">
         <StackLayout         
             Padding="10, 20, 10, 5">
             <Grid
@@ -12,12 +14,8 @@
 
                 <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="*"/>
-
-                    <ColumnDefinition Width="2*"/>
-
-
-
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
                 <Label
@@ -32,7 +30,7 @@
                     x:Name="entryUsername"
                     Grid.Row="0"
                     Grid.Column="1"
-                    
+                    Text="{Binding User, Mode=TwoWay}" 
                     Placeholder="Enter your username...">
                 </Entry>
 
@@ -47,6 +45,7 @@
                     x:Name="entryEmail"
                     Grid.Row="1"
                     Grid.Column="1"
+                    Text="{Binding Email, Mode=TwoWay}" 
                     Placeholder="Enter your email...">
                 </Entry>
 
@@ -63,7 +62,7 @@
                     x:Name="entryConfirmEmail"
                     Grid.Row="2"
                     Grid.Column="1"
-                    
+                    Text="{Binding ConfirmedEmail, Mode=TwoWay}" 
                     Placeholder="Confirm your email...">
                 </Entry>
                 <Label
@@ -91,7 +90,7 @@
                         Grid.Row="4"
                         Grid.Column="1"
                         IsPassword="True"
-                        Text="{Binding Password, Mode=TwoWay}"
+                        Text="{Binding ConfirmedPassword, Mode=TwoWay}"
                         Placeholder="Enter your password...">
                     </Entry>
 
@@ -105,7 +104,9 @@
                 <DatePicker VerticalOptions="CenterAndExpand"
                         Grid.Row="5"
                         Grid.Column="1">
+
                     <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                    
                 </DatePicker>
 
                 <Label
@@ -119,6 +120,7 @@
                     x:Name="entryCountry"
                     Grid.Row="6"
                     Grid.Column="1"
+                    Text="{Binding Country, Mode=TwoWay}" 
                               
                     Placeholder="Your country">
 
@@ -135,7 +137,7 @@
                     x:Name="entryProvince"
                     Grid.Row="7"
                     Grid.Column="1"
-                   
+                   Text="{Binding Province, Mode=TwoWay}" 
                     Placeholder="Your province">
 
                 </Entry>
@@ -153,9 +155,9 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Button
-                x:Name="buttonRegister"
-                Clicked="validateRegister"
+                    <Button
+                x:Name="buttonRegister"              
+                Command="{Binding RegisterCommand}"
                 Grid.Column="0"
                 Grid.Row="0"
                 Text="OK">
@@ -163,7 +165,7 @@
 
                 <Button
                 x:Name="buttonClear"
-                Clicked="clearEntries"
+                Command="{Binding ClearCommand}"
                 Grid.Column="1"
                 Grid.Row="0"
                 Text="Clear">

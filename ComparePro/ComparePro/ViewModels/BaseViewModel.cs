@@ -9,7 +9,8 @@ namespace ComparePro.ViewModels
     
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    //Clase genérica para evitar la redundancia y duplicidad en nuestro código --Pendiente por implementar
+    //Clase genérica para evitar la redundancia y duplicidad en nuestro código para setear propiedades 
+    //e implementar la interfaz INotifyPropertyChanged
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
