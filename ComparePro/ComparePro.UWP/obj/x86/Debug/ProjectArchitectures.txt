@@ -1,0 +1,2 @@
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.UWP\ComparePro.UWP.csproj;x86
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro\ComparePro.csproj;neutral

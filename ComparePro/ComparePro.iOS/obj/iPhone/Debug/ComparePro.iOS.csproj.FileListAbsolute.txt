@@ -1,0 +1,8 @@
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\ibtool\_BundleResourceWithLogicalName.items
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\actool\_PartialAppManifest.items
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\actool\_BundleResourceWithLogicalName.items
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\optimized\
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\ComparePro.iOS.csprojResolveAssemblyReference.cache
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\ComparePro.iOS.csproj.CoreCompileInputs.cache
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\ComparePro.iOS.exe
+C:\Users\ali\documents\visual studio 2017\Projects\ComparePro\ComparePro\ComparePro.iOS\obj\iPhone\Debug\ComparePro.iOS.pdb
